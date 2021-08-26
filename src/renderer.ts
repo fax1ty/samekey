@@ -11,7 +11,3 @@ const minimize = document.getElementById('minimize');
 minimize.addEventListener('click', () => rendererMessageHub.emit('minimize'));
 const close = document.getElementById('close');
 close.addEventListener('click', () => rendererMessageHub.emit('close'));
-
-document.addEventListener('keydown', ({ key }) =>
-   rendererMessageHub.emit('type', key)
-);

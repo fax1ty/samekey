@@ -7,6 +7,8 @@ import { Server } from 'socket.io';
 import SocketClient, { Socket } from 'socket.io-client';
 import { Netmask } from 'netmask';
 import axios from 'axios';
+import iohook from 'iohook';
+import { getKey } from './keys';
 
 async function createWindow() {
    const mainWindow = new BrowserWindow({
@@ -49,19 +51,17 @@ async function createWindow() {
             socket.on('type', (key: string) => robot.keyTap(key));
          });
       }
-      // ['q', 'w' ,'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', 'z', 'x', 'c', 'v', 'b', ''].forEach(key => {
-      //   major ? socketServer.sockets.send('type', key) : socketClient.emit('type', key);
-      //   console.log(major, key);
-      // });
+      iohook.on('keydown', ({ keycode }) => {
+         major
+            ? socketServer.sockets.emit('type', getKey(keycode))
+            : socketClient.emit('type', getKey(keycode));
+      });
+      iohook.start(false);
       const mainMessageHub = new MainMessageHub();
       mainMessageHub.on('*', {
          setIp: () => address.ip(),
          minimize: () => mainWindow.minimize(),
          close: () => mainWindow.close(),
-         type: (key: string) =>
-            major
-               ? socketServer.sockets.send('type', key)
-               : socketClient.emit('type', key),
       });
    } catch (e) {
       console.error(e);
@@ -78,6 +78,7 @@ app.on('ready', async () => {
 
 app.on('will-quit', () => {
    globalShortcut.unregisterAll();
+   iohook.stop();
 });
 
 app.on('window-all-closed', () => {

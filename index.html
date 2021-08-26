@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8" />
+      <title>Samekey App</title>
+   </head>
+
+   <body>
+      <div class="app">
+         <div class="titleBar">
+            <div style="flex: 1"></div>
+            <div style="display: flex">
+               <div id="minimize" class="titleButton">
+                  <img alt="" src="https://i.imgur.com/6XoIq8P.png" />
+               </div>
+               <div id="close" class="titleButton">
+                  <img alt="" src="https://i.imgur.com/i3Q2vRg.png" />
+               </div>
+            </div>
+         </div>
+         <div class="content">
+            <div style="display: flex; flex-direction: column; gap: 10px">
+               <h1>Samekey ⌨️</h1>
+               <b>Любое устройство, в качестве клавиатуры</b>
+            </div>
+            <p>
+               Просто подключите ещё одно поддерживаемое устройство по Wi-Fi.<br />На
+               данный момент, магия происходит только в локальной сети
+            </p>
+            <div style="flex: 1"></div>
+            <p id="ip" style="align-self: flex-end">IP: ???</p>
+         </div>
+      </div>
+
+      <script>
+         var exports = {};
+      </script>
+      <script src="./dist/renderer.js"></script>
+
+      <style>
+         @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
+
+         html,
+         body {
+            padding: 0;
+            margin: 0;
+            font-family: 'Source Sans Pro', sans-serif;
+         }
+
+         h1,
+         h2,
+         p,
+         b {
+            margin: 0;
+         }
+
+         .app {
+            color: white;
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+         }
+
+         .titleBar {
+            display: flex;
+            height: 35px;
+            background-color: #281528;
+            -webkit-app-region: drag;
+         }
+
+         .titleButton {
+            width: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            -webkit-app-region: no-drag;
+         }
+
+         .titleButton:hover {
+            background-color: #371f36;
+         }
+
+         .titleButton img {
+            width: 15px;
+            height: 15px;
+         }
+
+         .content {
+            background-color: #281528;
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            padding: 25px;
+            gap: 25px;
+         }
+      </style>
+   </body>
+</html>

@@ -1,0 +1,48 @@
+{
+   "name": "samekey-app",
+   "version": "0.0.1",
+   "description": "Use anything as your keyboard",
+   "scripts": {
+      "build": "tsc",
+      "watch": "tsc -w",
+      "lint": "eslint -c .eslintrc --ext .ts ./src",
+      "start": "yarn build && electron ./dist/main.js",
+      "rebuild": "electron-rebuild",
+      "make:exe": "yarn build && electron-builder build --win=portable --x64"
+   },
+   "author": "fax1ty",
+   "main": "./dist/main.js",
+   "build": {
+      "asar": true,
+      "appId": "ru.fax1ty.samekey",
+      "copyright": "With love by fax1ty",
+      "productName": "Samekey",
+      "files": [
+         "./dist/**/*",
+         "./index.html"
+      ],
+      "directories": {
+         "output": "build",
+         "buildResources": "resources"
+      }
+   },
+   "devDependencies": {
+      "@typescript-eslint/eslint-plugin": "^4.29.2",
+      "@typescript-eslint/parser": "^4.29.2",
+      "electron": "^13.1.7",
+      "electron-builder": "^22.11.7",
+      "electron-rebuild": "^3.2.0",
+      "eslint": "^7.32.0",
+      "typescript": "^4.3.5"
+   },
+   "dependencies": {
+      "@types/netmask": "^1.0.30",
+      "address": "^1.1.2",
+      "axios": "^0.21.1",
+      "netmask": "^2.0.2",
+      "robotjs": "^0.6.0",
+      "simple-electron-ipc": "^1.1.2",
+      "socket.io": "^4.1.3",
+      "socket.io-client": "^4.1.3"
+   }
+}
